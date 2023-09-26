@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Twitch-AdBlock-PiP",
+  "description": "Twitch Ad Blocker & PiP Extension for Enhanced Viewing",
+  "version": "1.0.1",
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/contents.js"
+      ],
+      "matches": [
+        "https://www.twitch.tv/*"
+      ]
+    }
+  ]
+}
