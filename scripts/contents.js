@@ -1,25 +1,38 @@
 if (location.host === "www.twitch.tv") {
-  let retryCount = 0;
-  const maxRetryCount = 5;
-
-  function skipTwitchAds() {
-    const adOverlay = document.querySelector('.video-player__overlay');
-    if (adOverlay) {
-      const skipButton = adOverlay.querySelector('.player-ad-message__skip-button');
-      if (skipButton) {
-        skipButton.click();
+  (async function() {
+     while (true) {
+      await new Promise(resolve => setTimeout(resolve, 10000));
+      const sunege = document.querySelector('[aria-label="ボーナスを受け取る"]');
+      if (sunege && window.getComputedStyle(sunege).display !== 'none') {
+        sunege.click();
       }
     }
-  }
+  })();
+}
+
+if (location.host === "www.twitch.tv") {
+  const muteStamp = '[alt="BloodTrail"] , [alt="BigPhish"] , [alt=DinoDance]';
+  const muteuser = '[data-a-user="haruharu04170417"]'
+  const loop = () => {
+    const chat = document.querySelector('[aria-label="チャットメッセージ"]');
+    const del_user = chat.querySelectorAll(muteuser);
+    const del_stamps = chat.querySelectorAll(muteStamp);
+    del_user.forEach(user => {
+      user.remove()
+    });
+    del_stamps.forEach(stamp => {
+      stamp.parentElement.parentElement.parentElement.parentElement.remove();
+    });
+  };
+  setInterval(loop, 500);
+}
+
+if (location.host === "www.twitch.tv") {
+  let retryCount = 0;
+  const maxRetryCount = 10;
   function Add_PictureInPicture_with_twitch() {
     const video_tag = document.querySelector('.InjectLayout-sc-1i43xsx-0 video');
-    function toggle() {
-      if (document.pictureInPictureElement) {
-        document.exitPictureInPicture();
-      } else {
-        video_tag.requestPictureInPicture();
-      }
-    }
+    function toggle() {document.pictureInPictureElement ? document.exitPictureInPicture() : video_tag.requestPictureInPicture();}
     if (video_tag) {
       const buttonSpace = document.querySelector('.player-controls__right-control-group');
       if (buttonSpace) {
@@ -30,13 +43,12 @@ if (location.host === "www.twitch.tv") {
         buttonSpace.appendChild(createButton);
       } else if (retryCount < maxRetryCount) {
         retryCount++;
-        setTimeout(Add_PictureInPicture_with_twitch, 1000);
+        setTimeout(Add_PictureInPicture_with_twitch, 500);
       }
     } else if (retryCount < maxRetryCount) {
       retryCount++;
-      setTimeout(Add_PictureInPicture_with_twitch, 1000);
+      setTimeout(Add_PictureInPicture_with_twitch, 500);
     }
   }
   Add_PictureInPicture_with_twitch();
-  setInterval(skipTwitchAds, 1000);
 }
