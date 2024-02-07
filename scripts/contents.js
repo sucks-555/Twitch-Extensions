@@ -11,21 +11,20 @@ if (location.host === "www.twitch.tv") {
 }
 
 if (location.host === "www.twitch.tv") {
-  const muteStamp = '[alt="BloodTrail"] , [alt="BigPhish"] , [alt=DinoDance]';
-  const muteuser = '[data-a-user="haruharu04170417"]'
+  const muteStamp = '[alt="BloodTrail"], [alt="BigPhish"], [alt="DinoDance"]';
+  const muteuser = '[data-a-user="haruharu04170417"]';
   const loop = () => {
     const chat = document.querySelector('[aria-label="チャットメッセージ"]');
-    const del_user = chat.querySelectorAll(muteuser);
-    const del_stamps = chat.querySelectorAll(muteStamp);
-    del_user.forEach(user => {
-      user.remove()
+    chat.querySelectorAll(muteStamp).forEach(stamp => {
+      stamp.closest('[data-a-target="chat-line-message"]').remove();
     });
-    del_stamps.forEach(stamp => {
-      stamp.parentElement.parentElement.parentElement.parentElement.remove();
+    chat.querySelectorAll(muteuser).forEach(user => {
+      user.remove();
     });
   };
   setInterval(loop, 500);
 }
+
 
 if (location.host === "www.twitch.tv") {
   let retryCount = 0;
