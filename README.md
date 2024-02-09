@@ -1,5 +1,5 @@
 ```js
-if (location.host === "www.twitch.tv") { // 自動すね毛回収
+if (location.host === "www.twitch.tv") {
   (async function() {
      while (true) {
       await new Promise(resolve => setTimeout(resolve, 10000));
