@@ -16,11 +16,11 @@ if (location.host === "www.twitch.tv") {
   const muteuser = '[data-a-user="haruharu04170417"]';
   const loop = () => {
     const chat = document.querySelector('[aria-label="チャットメッセージ"]');
-    chat.querySelectorAll(muteStamp).forEach(stamp => {
-      stamp.closest('[data-a-target="chat-line-message"]').remove();
+    chat && chat.querySelectorAll(muteStamp).forEach(stamp => {
+      stamp.closest('[data-test-selector="emote-button"]').remove();
     });
-    chat.querySelectorAll(muteuser).forEach(user => {
-      user.remove();
+    chat && chat.querySelectorAll(muteuser).forEach(user => {
+      user.closest('[data-a-target="chat-line-message"]').remove();
     });
   };
   setInterval(loop, 500);
